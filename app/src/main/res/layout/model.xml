@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This is the  model of the layout that we wanna
+ populate and show in our listView-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp">
+
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:id="@+id/mag"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:id="@+id/place"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:id="@+id/date"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"/>
+
+</LinearLayout>

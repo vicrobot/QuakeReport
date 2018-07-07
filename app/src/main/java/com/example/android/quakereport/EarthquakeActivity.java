@@ -1,55 +1,51 @@
-/*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+//package name
 package com.example.android.quakereport;
 
+//imports
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 
+//class defining
 public class EarthquakeActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
 
+    //overriding onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setting the activity that we want to populate and in this case
+        // we have our listView that we have to set.
         setContentView(R.layout.earthquake_activity);
 
         // Create a fake list of earthquake locations.
-        ArrayList<String> earthquakes = new ArrayList<>();
-        earthquakes.add("San Francisco");
-        earthquakes.add("London");
-        earthquakes.add("Tokyo");
-        earthquakes.add("Mexico City");
-        earthquakes.add("Moscow");
-        earthquakes.add("Rio de Janeiro");
-        earthquakes.add("Paris");
+        // This is the use of generics of java which tells that about your
+        // creation of making a sequence of your explicit type
+        ArrayList<QuakeList> earthquakes = new ArrayList<>();
+        earthquakes.add(new QuakeList(4.5,"San Francisco",12071999));
+        earthquakes.add(new QuakeList(7.2,"London",12071999));
+        earthquakes.add(new QuakeList(6.5,"Tokyo",12071999));
+        earthquakes.add(new QuakeList(3.9,"Mexico",12071999));
+        earthquakes.add(new QuakeList(5.7,"Moscow",12071999));
+        earthquakes.add(new QuakeList(6.0,"Rio de Janeiro",12071999));
+        earthquakes.add(new QuakeList(8.9,"Paris",12071999));
 
         // Find a reference to the {@link ListView} in the layout
-        ListView earthquakeListView = (ListView) findViewById(R.id.list);
+        ListView lw = (ListView) findViewById(R.id.list);
 
-        // Create a new {@link ArrayAdapter} of earthquakes
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, earthquakes);
+        //This was previously the ArrayAdapter which used to take the inputs consisting context,
+        // the layout which were made by developers "android.R.layout.simple_list_item_1", and
+        // the resource which you wanted to populate in the list which were fixed.
+        // this was the input:- this,android.R.layout.simple_list_item_1, earthquakes
+        // But due to this we created a new adapter which can take our own type of
+        // inputs {@link QuakeList} and can set it to our own type of layout{@link model.xml}.
+
+        QuakeAdapter adapter = new QuakeAdapter(this, earthquakes);
 
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
-        earthquakeListView.setAdapter(adapter);
+        lw.setAdapter(adapter);
     }
 }
